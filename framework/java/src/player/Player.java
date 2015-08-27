@@ -3,8 +3,10 @@ package player;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import game.PlayerStack;
+
 public class Player {
-	String name;
+	public String name;
 	String username;
 	byte[] passHash;
 	static final int hashCt = 4;
@@ -21,7 +23,8 @@ public class Player {
 		username = un;
 		acctNum = ++acctCt;
 	}
-	public PlayerRep rep() {
-		return new PlayerRep(this);
+	
+	public void enterStack(PlayerStack ps) {
+		ps.addPlayer(this);
 	}
 }

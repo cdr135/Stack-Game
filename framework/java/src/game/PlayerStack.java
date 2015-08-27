@@ -3,23 +3,31 @@ package game;
 import java.util.Deque;
 import java.util.LinkedList;
 
-import player.PlayerRep;
+import player.Player;
 
 public class PlayerStack {
-	Deque<PlayerRep> stack;
+	Deque<Player> stack;
 	final double fe;
 	final double be;
 	final int cd;	//cooldown, steps
 	
 	public PlayerStack() {
-		stack = new LinkedList<PlayerRep>();
-		fe = .2;
-		be = .04;
-		cd = 40;
+		this(.2, .04, 40);
+	}
+	public PlayerStack(double f, double b, int c) {
+		stack = new LinkedList<Player>();
+		fe = f;
+		be = b;
+		cd = c;
 	}
 	
-	public PlayerRep step() {
-		PlayerRep ret = null;
+	public void addPlayer(Player p) {
+		if (!stack.contains(p))
+			stack.addFirst(p);
+	}
+	
+	public Player step() {
+		Player ret = null;
 		if (Math.random() < fe)
 			ret = stack.pollFirst();
 		if (Math.random() < be)
